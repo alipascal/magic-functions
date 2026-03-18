@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>majic functions</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+
+<style>
+  body { font-family: "Inter", sans-serif; background-color: black; color: white;
+  }
+  .center { display: flex; justify-content: center; align-items: center; height: 100vh; position: relative;
+  }
+  span { position: absolute; }
+  #page {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+</style>
+
+</head>
+
+<body>
+  <div id="page" class="center"><span>o</span></div>
+
+<!-- Footer -->
+<!-- 
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+-->
+<script>
+  cercle('\u0343\u0316\u0340');
+  linear('\u0357');
+
+  // Zaglo Alphabet
+  glitchesUP = [
+   '\u030d','\u030e','\u0304','\u0305','\u033f','\u0311','\u0306',
+   '\u0310','\u0352','\u0357','\u0351','\u0307','\u0308','\u030a',
+   '\u0342','\u0343','\u0344','\u034a','\u034b','\u034c','\u0303'
+  ]
+
+  glitchesMID = [
+   '\u0315','\u031b','\u0340','\u0341','\u0358','\u0321','\u0322',
+   '\u0327','\u0328','\u0334','\u0335','\u0336','\u034f'
+  ]
+
+  glitchesDOWN = [
+   '\u0316','\u0317','\u0318','\u0319','\u031c','\u0323','\u0324',
+   '\u0325','\u0326','\u0329','\u032a','\u032b','\u032c','\u032d',
+   '\u032e','\u032f','\u0330','\u0331','\u0332','\u0333'
+  ]
+
+  window.addEventListener('mousepos', mousepos);
+
+  function mousepos(event) {
+    console.log(
+        'pageX: ', event.pageX, 'pageY: ', event.pageY,
+        'clientX: ', event.clientX, 'clientY:', event.clientY)
+  }
+
+  var id = null;
+  function animation() {
+    var elem = document.getElementById("myAnimation");
+    var pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 10);
+    function frame() {
+      if (pos == 350) {
+        clearInterval(id);
+      } else {
+        pos++;
+        elem.style.top = pos + 'px';
+        elem.style.left = pos + 'px';
+      }
+    }
+  }
+
+  function addchar(char, x, y){
+    // create span elem
+    var elem = document.createElement("SPAN");
+    var textElem = document.createTextNode(char);
+    elem.appendChild(textElem);
+
+    // set position
+    elem.style.top = y + 'px';
+    elem.style.left = x + 'px';
+
+    page.appendChild(elem);
+  }
+
+  function linear(char) {
+    const page = document.querySelector("#page");
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    console.log({w: w, h: h})
+
+    for (let i = 0; i < 1000; i = i + 10) {
+      // function y = ax + b; y = x + 20
+      const a = 1
+      const b = 20
+
+      // calculated position
+      var y; var x;
+      y = a * i + b
+      x = i
+      if ((y > h) | (x > w)) break;
+      addchar(char, x, y);
+
+      console.log({x: x, y: y})
+    }
+
+  }
+
+  function cercle(char) {
+    const page = document.querySelector("#page");
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    console.log({w: w, h: h})
+
+    const cx = 200, cy = 200, r = 100;
+
+    for (let t = 0; t < 2 * Math.PI; t += 0.1) {
+      var x = cx + r * Math.cos(t);
+      var y = cy + r * Math.sin(t);
+      addchar(char, x, y);
+    }
+
+  }
+
+  function animation1(){
+    const elem = document.querySelector("span");
+    elem.style.transform = 'translateX(100px)';
+    elem.style.transition = 'transform 0.3s ease';
+  }
+
+  function animation2(){
+    const element = document.querySelector("span");
+
+    function animate(timestamp) {
+      element.style.left = Math.sin(timestamp / 1000) * 100 + 'px';
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
+
+  // docs : https://developer.mozilla.org/fr/docs/Web/API/Window/requestAnimationFrame
+
+  /*
+  TODO
+  - mettre les position en relaitve par rapport à un objet (par rapport au centre)
+  - avancer un peu sur l'annimation, et trouver une solution. -> voir documentation requestAnimationFrame
+
+  */
+
+</script>
+
+</body>
+</html>
